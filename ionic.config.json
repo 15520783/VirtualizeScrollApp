@@ -1,0 +1,7 @@
+{
+  "name": "VirtualizeScrollApp",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

@@ -1,0 +1,27 @@
+<cdk-virtual-scroll-viewport
+  #cdkView
+  class="ion-content-scroll-host"
+  [itemSize]="rowHeightPx"
+  [minBufferPx]="MIN_BUFFER_PX"
+  [maxBufferPx]="MAX_BUFFER_PX"
+  [templateCacheSize]="CACHE_SIZE"
+>
+  <ion-list class="ion-no-padding">
+    <ng-container *cdkVirtualFor="let row of data">
+      <div [ngStyle]="{ height: rowHeightPx + 'px' }">
+        <ng-template
+          [ngTemplateOutlet]="templateRef"
+          [ngTemplateOutletContext]="{ $implicit: row }"
+        >
+        </ng-template>
+      </div>
+    </ng-container>
+  </ion-list>
+  <ion-infinite-scroll
+    (ionInfinite)="onIonInfinite($event)"
+    loadingText="Please wait..."
+    loadingSpinner="bubbles"
+  >
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</cdk-virtual-scroll-viewport>

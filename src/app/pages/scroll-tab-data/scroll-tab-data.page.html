@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-segment [scrollable]="true" [value]="selectedTab">
+      <ion-segment-button
+        color="primary"
+        *ngFor="let tab of tabTitleData;let idx = index"
+        [value]="idx"
+        (click)="segmentChanged(idx)"
+        >{{tab.name}}</ion-segment-button
+      >
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+<swiper-container
+  #swipeSlide
+  (slidechange)="onSlideChange()"
+  [modules]="swiperModules"
+>
+  <swiper-slide *ngFor="let i of totalSlideCount">
+    <ion-content [fullscreen]="true" [scrollY]="false" class="main-body">
+      <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+      </ion-refresher>
+      <virtual-list-data
+        #appListData
+        [data]="getMessages()"
+        (onInfinite)="onIonInfinite($event)"
+        [rowHeightPx]="90"
+      >
+        <ng-template let-row>
+          <app-message [message]="row"></app-message>
+        </ng-template>
+      </virtual-list-data>
+    </ion-content>
+  </swiper-slide>
+</swiper-container>
